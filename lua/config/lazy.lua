@@ -13,6 +13,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end
 vim.opt.rtp:prepend(lazypath)
+-- Set proxy environment variables
+vim.env.http_proxy = "http://127.0.0.1:2080"
+vim.env.https_proxy = "http://127.0.0.1:2080"
 
 require("lazy").setup({
   spec = {
@@ -29,7 +32,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.json" },
     -- Add Telescope.nvim and its dependency
     { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
-    -- Replace copilot import with direct plugin inclusion for compatibility
+    -- Add GitHub Copilot plugin
     { "github/copilot.vim" },
     { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
     { import = "plugins" },

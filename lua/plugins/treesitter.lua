@@ -19,6 +19,11 @@ return {
         "scss",
         "sql",
         "svelte",
+        "zig",
+        "perl",
+        "ruby",
+        "r",
+        "swift",
         -- Remove fish parser as zsh doesn't have it
         -- "fish",
       },
