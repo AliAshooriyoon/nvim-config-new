@@ -13,6 +13,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end
 vim.opt.rtp:prepend(lazypath)
+
 -- Set proxy environment variables
 vim.env.http_proxy = "http://127.0.0.1:2080"
 vim.env.https_proxy = "http://127.0.0.1:2080"
@@ -32,8 +33,6 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.json" },
     -- Add Telescope.nvim and its dependency
     { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
-    -- Add GitHub Copilot plugin
-    { "github/copilot.vim" },
     { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
     { import = "plugins" },
     -- Add Comment.nvim
@@ -49,6 +48,16 @@ require("lazy").setup({
       config = function()
         -- Key mapping for inserting Lorem Ipsum
         vim.keymap.set("n", "<leader>li", ":Lorem<CR>", { desc = "Insert Lorem Ipsum" })
+      end,
+    },
+    -- Add GitHub Copilot plugin (Ensure no conflict)
+    {
+      "github/copilot.vim",
+      config = function()
+        vim.env.http_proxy = "http://127.0.0.1:2080" -- Replace with your proxy
+        vim.env.https_proxy = "http://127.0.0.1:2080" -- Replace with your proxy
+        -- Enable GitHub Copilot
+        vim.g.copilot_enabled = 1
       end,
     },
   },
